@@ -68,12 +68,12 @@ func main() {
 			slog.Debug("PAPERLESS_TOKEN_FILE environmental variable not available, defaulting to ./secrets/token")
 			token_file = "./secrets/token"
 		}
+		token_bytes, err := os.ReadFile(token_file)
+		if err != nil {
+			slog.Error(fmt.Sprintf("Unable to read tokenfile %s", token_file))
+		}
+		token = string(token_bytes)
 	}
-	token_bytes, err := os.ReadFile(token_file)
-	if err != nil {
-		slog.Error(fmt.Sprintf("Unable to read tokenfile %s", token_file))
-	}
-	token = string(token_bytes)
 
 	if token == "" {
 		slog.Error("No Paperless token available, exiting")

@@ -16,7 +16,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/paperless_exporter
+RUN GOOS=linux go build -ldflags="-w -s" -o /go/bin/paperless_exporter
 
 # Final image
 FROM scratch
